@@ -47,8 +47,14 @@ WHERE weight_kg >= 10.4 AND weight_kg <= 17.3;
 -- Inside a transaction update the animals table by setting the species column to 
 -- unspecified. Verify that change was made. Then roll back the change and verify
 -- that the species columns went back to the state before the transaction.
-UPDATE animals
-SET species = 'unspecified';
+BEGIN;
+  UPDATE animals
+  SET species = 'unspecified';
+  SELECT *
+  FROM animals;
+ROLLBACK;
+SELECT *
+FROM animals;
 
 -- Inside a transaction:
 -- · Update the animals table by setting the species column to digimon for all
@@ -63,7 +69,7 @@ BEGIN;
   WHERE name LIKE '%mon';
   UPDATE animals
   SET species = 'pokemon'
-  WHERE species = 'unspecified';
+  WHERE species IS NULL;
 COMMIT;
 
 SELECT *
