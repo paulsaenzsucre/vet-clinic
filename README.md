@@ -14,7 +14,6 @@
   - [🛠 Built With](#built-with)
     - [Tech Stack](#tech-stack)
     - [Key Features](#key-features)
-  - [🚀 Live Demo](#live-demo)
 - [💻 Getting Started](#getting-started)
   - [Setup](#setup)
   - [Prerequisites](#prerequisites)
@@ -24,7 +23,6 @@
 - [🤝 Contributing](#contributing)
 - [⭐️ Show your support](#support)
 - [🙏 Acknowledgements](#acknowledgements)
-- [❓ FAQ](#faq)
 - [📝 License](#license)
 
 # 📖 Vet Clinic <a name="about-project"></a>
@@ -54,12 +52,6 @@ You can use sql to mutate the database state.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-## 🚀 Live Demo <a name="live-demo"></a>
-
-Not implemented yet.
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
 ## 💻 Getting Started <a name="getting-started"></a>
 
 This repository includes files with plain SQL that can be used to recreate a database:
@@ -81,7 +73,7 @@ To clone this repository to your desired folder:
 - You can download the **Zip** file from the GitHub repository, or clone the repository with:
 
 ```console
-git clone https://github.com/elafildecolor/Bookstore.git
+git clone https://github.com/paulsaenzsucre/vet-clinic.git
 ```
 
 - Access the cloned directory with:
@@ -107,7 +99,7 @@ psql -U username -f queries.sql
 
 👤 **Paul Sáenz Sucre**
 
-- GitHub: [@elafildecolor](https://github.com/elafildecolor)
+- GitHub: [@paulsaenzsucre](https://github.com/paulsaenzsucre)
 - Twitter: [@paulsaenzsucre](https://twitter.com/paulsaenzsucre)
 - LinkedIn: [LinkedIn](https://www.linkedin.com/in/paulsaenzsucre)
 
@@ -115,9 +107,7 @@ psql -U username -f queries.sql
 
 ## 🔭 Future Features <a name="future-features"></a>
 
-> Describe 1 - 3 features you will add to the project.
-
-- [ ] **Add more tables**
+- [ ] **Add vets, specialties and visits tables**
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
