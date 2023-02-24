@@ -209,3 +209,108 @@ HAVING COUNT(animals.name) = (
     LEFT JOIN animals ON owners.id = animals.owner_id
     GROUP BY owners.full_name
   ) AS counts);
+
+
+-- Who was the last animal seen by William Tatcher?
+SELECT animals.name
+FROM animals
+INNER JOIN visits ON animals.id = visits.animal_id
+WHERE visits.date_of_visit = (
+  SELECT MAX(dates)
+  FROM (
+    SELECT visits.animal_id, visits.date_of_visit AS dates
+    FROM visits
+    INNER JOIN vets ON visits.vet_id = vets.id
+    WHERE vets.name = 'William Tatcher'
+    ORDER BY visits.date_of_visit DESC) AS meetings);
+
+-- How many different animals did Stephanie Mendez see
+SELECT COUNT (*)
+FROM visits
+LEFT JOIN vets ON visits.vet_id = vets.id
+WHERE vets.name = 'Stephanie Mendez';
+
+-- List all vets and their specialties, including vets with no specialties.
+SELECT vets.name, STRING_AGG (species.name, ', ') AS specialities
+FROM vets
+LEFT JOIN specializations ON vets.id = specializations.vet_id
+LEFT JOIN species ON specializations.specie_id = species.id
+GROUP BY vets.name;
+
+-- List all animals that visited Stephanie Mendez between April 1st and August 30th, 2020.
+SELECT animals.name
+FROM animals
+INNER JOIN visits ON animals.id = visits.animal_id
+INNER JOIN vets ON  visits.vet_id = vets.id
+WHERE vets.name = 'Stephanie Mendez' AND date_of_visit BETWEEN '2020-04-01' AND '2020-08-30';
+
+-- What animal has the most visits to vets?
+SELECT animals.name, COUNT(visits.date_of_visit)
+FROM visits
+INNER JOIN animals ON visits.animal_id = animals.id
+GROUP BY animals.name
+HAVING COUNT(visits.date_of_visit) = (
+  SELECT MAX(vet_visits)
+  FROM (
+    SELECT animal_id, COUNT(date_of_visit) AS vet_visits
+    FROM visits
+    GROUP BY animal_id
+  ) AS counts);
+
+-- Who was Maisy Smith's first visit?
+SELECT animals.name
+FROM animals
+INNER JOIN visits ON animals.id = visits.animal_id
+WHERE visits.date_of_visit = (
+  SELECT MIN(dates)
+  FROM (
+    SELECT visits.animal_id, visits.date_of_visit AS dates
+    FROM visits
+    INNER JOIN vets ON visits.vet_id = vets.id
+    WHERE vets.name = 'Maisy Smith') AS meetings);
+
+-- Details for most recent visit: animal information, vet information, and date of visit.
+SELECT visits.date_of_visit AS visit_date, animals.name AS animal_name, animals.date_of_birth AS animal_birth,
+  animals.escape_attempts AS animal_escapes,
+  CASE
+    WHEN neutered THEN 'Neutered'
+    ELSE 'Not neutered'
+  END AS animal_type,
+  animals.weight_kg AS animal_weight, owners.full_name AS owner_name, vets.name AS vet_name,
+  vets.age AS vet_age, vets.date_of_graduation AS vet_grad_date
+FROM visits
+INNER JOIN animals ON visits.animal_id = animals.id
+INNER JOIN owners ON animals.owner_id = owners.id
+INNER JOIN vets ON visits.vet_id = vets.id
+WHERE visits.date_of_visit = (
+  SELECT MAX(dates)
+  FROM (
+    SELECT visits.animal_id, visits.date_of_visit AS dates
+    FROM visits) AS meetings);
+
+-- How many visits were with a vet that did not specialize in that animal's species?
+SELECT COUNT(*)
+FROM visits
+INNER JOIN animals ON visits.animal_id = animals.id
+LEFT JOIN specializations ON animals.species_id = specializations.specie_id
+  AND visits.vet_id = specializations.vet_id
+WHERE specializations.specie_id IS NULL AND specializations.vet_id IS NULL;
+
+-- What specialty should Maisy Smith consider getting? Look for the species she gets the most.
+SELECT species.name, COUNT (animals.species_id)
+FROM visits
+INNER JOIN animals ON visits.animal_id = animals.id
+INNER JOIN vets ON visits.vet_id = vets.id
+INNER JOIN species ON  animals.species_id = species.id
+WHERE vets.name = 'Maisy Smith'
+    GROUP BY species.name
+HAVING COUNT (animals.species_id) = (
+  SELECT MAX(specie_visits)
+  FROM (
+    SELECT species.name, COUNT (animals.species_id) AS specie_visits
+    FROM visits
+    INNER JOIN animals ON visits.animal_id = animals.id
+    INNER JOIN vets ON visits.vet_id = vets.id
+    INNER JOIN species ON  animals.species_id = species.id
+    WHERE vets.name = 'Maisy Smith'
+    GROUP BY species.name) AS species_count);
