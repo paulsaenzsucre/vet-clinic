@@ -110,6 +110,12 @@ psql -U username -f queries.sql
 
 ## 👥 Authors <a name="authors"></a>
 
+👤 **Birhanu Gudisa**
+
+- GitHub: [@GutemaG](https://github.com/GutemaG)
+- Twitter: [@birhanugudisa3](https://twitter.com/birhanugudisa3)
+- LinkedIn: [birhanugudisa](https://linkedin.com/in/birhanugudisa)
+
 👤 **Paul Sáenz Sucre**
 
 - GitHub: [@paulsaenzsucre](https://github.com/paulsaenzsucre)
