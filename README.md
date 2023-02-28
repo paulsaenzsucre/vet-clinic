@@ -14,6 +14,7 @@
   - [🛠 Built With](#built-with)
     - [Tech Stack](#tech-stack)
     - [Key Features](#key-features)
+  - [Schema Diagram](#schema)
 - [💻 Getting Started](#getting-started)
   - [Setup](#setup)
   - [Prerequisites](#prerequisites)
@@ -49,6 +50,18 @@ You can use sql to mutate the database state.
 - **You can add animals**
 - **You can edit animals data**
 - **You can show animals data**
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+## 🛠 Schema Diagram <a name="schema"></a>
+
+<div align="center">
+  <img src="./vet_clinic.png" alt="schema" width="auto"  height="auto" />
+  <br/>
+
+  <h3><b>VET CLINIC SCHEMA DIAGRAM</b></h3>
+
+</div>
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
