@@ -53,3 +53,15 @@ CREATE TABLE visits (
   date_of_visit DATE,
   PRIMARY KEY(animal_id, vet_id, date_of_visit)
 );
+
+ALTER TABLE owners
+ADD COLUMN email VARCHAR(120);
+
+ALTER TABLE visits
+  ALTER COLUMN date_of_visit TYPE TIMESTAMP;
+
+CREATE INDEX anml_id ON visits(animal_id ASC);
+
+CREATE INDEX vt_id ON visits(vet_id ASC);
+
+CREATE INDEX own_id ON owners(email ASC);
